@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/amanc1248/easypizi#readme",
   "dependencies": {
+    "concurrently": "^7.2.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mysql": "^2.18.1"
