@@ -1,0 +1,19 @@
+{
+  "name": "easypizi",
+  "version": "1.0.0",
+  "description": "Employee User Management System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amanc1248/easypizi.git"
+  },
+  "author": "Aman Chaudhary",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amanc1248/easypizi/issues"
+  },
+  "homepage": "https://github.com/amanc1248/easypizi#readme"
+}
