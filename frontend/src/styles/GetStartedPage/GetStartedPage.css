@@ -17,8 +17,11 @@
 }
 .admin__signin__title{
     font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
+    font-weight: 500;
+    cursor: pointer;
 }
+/* .admin__signin__title:hover{
+} */
 
 .get__started__section{
     align-items: center;
@@ -30,6 +33,7 @@
 }
 .image__section{
     /* background-color: aqua; */
+    text-align: center;
 }
 .text__section__title{
 font-weight: 600;
@@ -53,6 +57,20 @@ font-size: 40px;
 }
 
 /* image section */
-.getStarte__page__image{
-
+.getStarte__page__image{ 
+    width: auto;
+    height: auto;
+}
+@media screen and (max-width:700px) {
+    .getStarte__page__image{ 
+        height:400px;
+    }
+    .text__section__title{
+        font-size: 30px;
+        }
+}
+@media screen and (max-width:500px) {
+    .getStarte__page__image{ 
+        height:300px !important;
+    }
 }
