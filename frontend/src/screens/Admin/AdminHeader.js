@@ -1,24 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useDispatch, useSelector } from "react-redux";
+
 import "../../styles/screens/Admin.css";
 import AdminProfile from "./AdminProfile";
+import { adminByIdAction } from "../../actions/adminActions";
 function AdminHeader() {
+  const dispatch = useDispatch();
+
   const [adminProfile, setAdminProfile] = useState(false);
   const showAdminProfile = () => {
     setAdminProfile(true);
   };
+
+  // useEffect
+  useEffect(() => {
+    dispatch(adminByIdAction());
+  }, [dispatch]);
+
+  // useselctor
+  const { loading, adminById, error } = useSelector(
+    (state) => state.adminByIdReducer
+  );
+
   return (
     <div>
       {adminProfile && (
         <AdminProfile setAdminProfile={setAdminProfile}></AdminProfile>
       )}
-      <Navbar expand="lg" bg="white" className="the__navbar">
+      <Navbar expand="lg" bg="#F2EBD1" className="the__navbar">
         <div>
           <Navbar.Brand href="/admin">
             <div className="admin__brand__container">
-              <div className="admin__brand">A</div>
-              <div className="admin__brand__name">admin</div>
+              <span className="admin__brand__name">
+                {adminById && adminById.company}
+              </span>
             </div>
           </Navbar.Brand>
         </div>

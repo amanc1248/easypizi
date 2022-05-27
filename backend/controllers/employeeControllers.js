@@ -103,8 +103,8 @@ const employeeFetchUsersController = asyncHandler(async (req, res) => {
 });
 
 const employeeLogoutController = asyncHandler(async (req, res) => {
-  req.session.destroy();
-  if (req.session) {
+  req.session.employeeAuthenticated = false;
+  if (req.session.employeeAuthenticated) {
     res.send("failure");
   } else {
     res.send("destroyed");

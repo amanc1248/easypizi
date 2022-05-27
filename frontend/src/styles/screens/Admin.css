@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+.admin__home{
+    background-color: #F2EBD1;
+
+}
 .profile__image{
     border-radius: 100%;
     height: 40px;
@@ -21,9 +27,9 @@
 }
 .admin__brand__name{
     margin-left: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #8F939D;
+    font-size: 35px !important;
+    font-weight: 700 !important;
+    font-family: 'Pacifico';
 }
 .admin__header__icons{
     color: black;
@@ -49,9 +55,8 @@
   }
 
   .add__employee__container{
-      background-color:#F7F9FD ;
+      /* background-color:#F7F9FD ; */
         border-radius: 4px;
-        padding: 40px;
   }
 
   .add__employee__button{
@@ -61,6 +66,8 @@
       color: white;
       padding: 10px 30px;
       font-weight: 700;
+      margin-right: 10px;
+      margin-bottom: 10px;
   }
   .admin__employee__container{
       margin: 10px 0;
@@ -131,3 +138,19 @@
     flex-direction: column;
     justify-content: space-between;
   }
+
+
+  .add__employee__users__image{
+    height: 350px;
+
+  }
+  @media screen and (max-width:700px) {
+    .add__employee__users__image{ 
+        height:300px;
+    }
+}
+@media screen and (max-width:500px) {
+    .add__employee__users__image{ 
+        height:200px !important;
+    }
+}

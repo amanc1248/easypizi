@@ -3,6 +3,14 @@ import {
   ADMIN_ADD_EMPLOYEE_CLEAR,
   ADMIN_ADD_EMPLOYEE_FAILURE,
   ADMIN_ADD_EMPLOYEE_SUCCESS,
+  ADMIN_ADD_USER,
+  ADMIN_ADD_USER_CLEAR,
+  ADMIN_ADD_USER_FAILURE,
+  ADMIN_ADD_USER_SUCCESS,
+  ADMIN_BY_ID,
+  ADMIN_BY_ID_CLEAN,
+  ADMIN_BY_ID_FAILURE,
+  ADMIN_BY_ID_SUCCESS,
   ADMIN_CHANGE_EMPLOYEE_PASSWORD,
   ADMIN_CHANGE_EMPLOYEE_PASSWORD_CLEAN_ERROR,
   ADMIN_CHANGE_EMPLOYEE_PASSWORD_FAILURE,
@@ -77,6 +85,22 @@ export const adminLoginReducer = (state = {}, action) => {
   }
 };
 
+export const adminByIdReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADMIN_BY_ID:
+      return { loading: true };
+    case ADMIN_BY_ID_SUCCESS:
+      return { loading: false, adminById: action.payload };
+    case ADMIN_BY_ID_FAILURE:
+      return { loading: false, error: action.payload };
+    case ADMIN_BY_ID_CLEAN:
+      return { adminById: null, error: null };
+
+    default:
+      return state;
+  }
+};
+
 export const checkAdminLoginStatusReducer = (state = {}, action) => {
   switch (action.type) {
     case CHECK_ADMIN_LOGIN_STATUS:
@@ -103,6 +127,21 @@ export const adminAddEmployeeReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case ADMIN_ADD_EMPLOYEE_CLEAR:
       return { addEmployee: null, error: null };
+    default:
+      return state;
+  }
+};
+
+export const adminAddUserReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADMIN_ADD_USER:
+      return { loading: true };
+    case ADMIN_ADD_USER_SUCCESS:
+      return { loading: false, addUser: action.payload };
+    case ADMIN_ADD_USER_FAILURE:
+      return { loading: false, error: action.payload };
+    case ADMIN_ADD_USER_CLEAR:
+      return { addUser: null, error: null };
     default:
       return state;
   }

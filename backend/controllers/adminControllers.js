@@ -88,6 +88,17 @@ const checkAdminLoginStatus = (req, res) => {
     res.send("notLoggedIn");
   }
 };
+
+const adminByIdController = (req, res) => {
+  let sql = "select company from admin where id=?";
+  db.query(sql, [req.session.admin_id], (err, result) => {
+    if (err) throw err;
+    else {
+      res.send(result[0]);
+      console.log(result);
+    }
+  });
+};
 const adminAddEmployeeController = asyncHandler(async (req, res) => {
   const {
     name,
@@ -127,6 +138,20 @@ const adminAddEmployeeController = asyncHandler(async (req, res) => {
       }
     }
   );
+});
+const adminAddUserController = asyncHandler(async (req, res) => {
+  const { name, email } = req.body;
+  const id = uniqid();
+
+  let sql = "INSERT INTO user values (?,?,?,?)";
+
+  db.query(sql, [id, name, email, req.session.admin_id], (err, result) => {
+    if (err) throw err;
+    else {
+      res.send("success");
+      console.log(result);
+    }
+  });
 });
 
 const adminFetchAllEmployeeController = asyncHandler(async (req, res) => {
@@ -262,8 +287,8 @@ const adminDeleteEmployeeController = asyncHandler(async (req, res) => {
 });
 
 const adminLogoutController = asyncHandler(async (req, res) => {
-  req.session.destroy();
-  if (req.session) {
+  req.session.adminAuthenticated = false;
+  if (req.session.adminAuthenticated) {
     res.send("failure");
   } else {
     res.send("destroyed");
@@ -282,4 +307,6 @@ module.exports = {
   checkAdminLoginStatus,
   adminEmployeeByIdController,
   adminEmployeeByIdAllDetailsController,
+  adminByIdController,
+  adminAddUserController,
 };

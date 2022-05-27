@@ -44,14 +44,12 @@ function EmployeeHeader() {
           employee={employeeById}
         ></EmployeeProfile>
       )}
-      <Navbar expand="lg" bg="white" className="the__navbar">
+      <Navbar expand="lg" className="the__navbar">
         <div>
           <Navbar.Brand href="/employee">
             <div className="admin__brand__container">
-              <div className="admin__brand">A</div>
               <div className="admin__brand__name">
                 {employeeById && employeeById.name} <br />
-                Employee
               </div>
             </div>
           </Navbar.Brand>

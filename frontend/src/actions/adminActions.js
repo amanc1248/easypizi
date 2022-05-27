@@ -43,6 +43,14 @@ import {
   ADMIN_REGISTER_SUCCESS,
   ADMIN_REGISTER_FAIL,
   ADMIN_REGISTER_CLEAN,
+  ADMIN_BY_ID,
+  ADMIN_BY_ID_SUCCESS,
+  ADMIN_BY_ID_FAILURE,
+  ADMIN_BY_ID_CLEAN,
+  ADMIN_ADD_USER,
+  ADMIN_ADD_USER_SUCCESS,
+  ADMIN_ADD_USER_FAILURE,
+  ADMIN_ADD_USER_CLEAR,
 } from "../constants/adminConstants";
 
 const axios = require("axios");
@@ -123,6 +131,41 @@ export const adminLoginClean = () => async (dispatch) => {
     type: ADMIN_LOGIN_CLEAN,
   });
 };
+
+// admin ADMIN_BY_ID
+export const adminByIdAction = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADMIN_BY_ID,
+    });
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.get(`/api/admin/adminById`, config);
+    dispatch({
+      type: ADMIN_BY_ID_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_BY_ID_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+// admin ADMIN_BY_ID_CLEAN
+export const adminByIdClean = () => async (dispatch) => {
+  dispatch({
+    type: ADMIN_BY_ID_CLEAN,
+  });
+};
+
 // check admin login status
 export const checkAdminLoginStatusAction = () => async (dispatch) => {
   try {
@@ -192,6 +235,40 @@ export const adminAddEmployeeAction = (employee) => async (dispatch) => {
 export const adminAddEmployeeClear = () => async (dispatch) => {
   dispatch({
     type: ADMIN_ADD_EMPLOYEE_CLEAR,
+  });
+};
+
+// admin ADD user
+export const adminAddUserAction = (user) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADMIN_ADD_USER,
+    });
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.post(`/api/admin/addUser`, user, config);
+    dispatch({
+      type: ADMIN_ADD_USER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_ADD_USER_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+// admin ADD user clean
+export const adminAddUserClean = () => async (dispatch) => {
+  dispatch({
+    type: ADMIN_ADD_USER_CLEAR,
   });
 };
 

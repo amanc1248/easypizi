@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import Message from "../../components/Message";
 import LoaderMain from "../../components/LoaderMain";
 import UserLoader from "../../components/UserLoader";
+import AddUser from "./AddUser";
 
 function AdminHome() {
   const dispatch = useDispatch();
@@ -24,6 +25,10 @@ function AdminHome() {
   const [addEmployee, setAddEmployee] = useState(false);
   const showAddEmployee = () => {
     setAddEmployee(true);
+  };
+  const [addUser, setAddUser] = useState(false);
+  const showAddUser = () => {
+    setAddUser(true);
   };
 
   // useSelectors
@@ -49,20 +54,24 @@ function AdminHome() {
           {addEmployee && (
             <AddEmployee setAddEmployee={setAddEmployee}></AddEmployee>
           )}
+          {addUser && <AddUser setAddUser={setAddUser}></AddUser>}
           <div className="row">
             <div className="add__employee__container col-lg-6 col-md-12 col-sm-12 ">
               <img
-                src="https://www.aesthetic.com/img/homepage/create.svg"
+                src="https://res.cloudinary.com/proudposhak-com/image/upload/v1653650145/easypizi/person-managing-digital-tasks_tvgeau.png"
                 alt="add emplyee"
-                height="200px"
+                className="add__employee__users__image"
               />
-              <h3>Add employee to the portal</h3>
-              <h6>Employee can send NFTs update from the portal</h6>
+              <h3>Add employee and users</h3>
+              <h6>Employee can send any updates to users</h6>
               <button
                 className="add__employee__button"
                 onClick={showAddEmployee}
               >
                 Add Employee
+              </button>
+              <button className="add__employee__button" onClick={showAddUser}>
+                Add User
               </button>
             </div>
             <div className="users__container col-lg-6 col-md-12 col-sm-12">

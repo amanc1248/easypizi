@@ -7,7 +7,9 @@
     font-weight: 700 !important;
     font-family: 'Pacifico';
 
-
+  }
+  .the__navbar{
+    background-color: #F2EBD1;
   }
   
   .hamburger__icon {
