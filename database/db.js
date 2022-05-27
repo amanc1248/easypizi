@@ -11,6 +11,6 @@ const db = mysql.createPool({
   multipleStatements: true,
   connectionLimit: 1000,
 });
-console.log("Database Connected");
+
 // Connect
 module.exports = { db };

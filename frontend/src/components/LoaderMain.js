@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/screens/Home.css";
+import "../styles/GetStartedPage/GetStartedPage.css";
 const LoaderMain = () => {
   return (
     <div className="main__loader">

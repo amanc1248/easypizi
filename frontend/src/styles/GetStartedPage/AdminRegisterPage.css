@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
 .apply__home__margin{
     margin: 0 10%;
@@ -102,12 +103,3 @@ font-weight: 800;
     
 }
 
-.login__employee__button{
-    width: 100%;
-    background-color: #F1C34B;
-    border-radius: 4px;
-    border:2px solid black;
-    height: 50px;
-    font-weight: 800;
-    font-size: 20px;
-}

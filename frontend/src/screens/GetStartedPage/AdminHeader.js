@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import MenuIcon from "@mui/icons-material/Menu";
-import "../styles/components/Header.css";
-import HomeAdminLogin from "../screens/Home/HomeAdminLogin";
-import HomeEmployeeLogin from "../screens/Home/HomeEmployeeLogin";
-function Header() {
+import "../../styles/GetStartedPage/AdminHeader.css";
+import HomeAdminLogin from "../../components/HomeAdminLogin";
+import HomeEmployeeLogin from "../../components/HomeEmployeeLogin";
+function AdminHeader() {
   const [adminLogin, setAdminLogin] = useState(false);
   const showAdminLogin = () => {
     setAdminLogin(true);
@@ -15,16 +15,16 @@ function Header() {
     setEmployeeLogin(true);
   };
   return (
-    <div className="apply__home__margin">
+    <div className="">
       {adminLogin && (
         <HomeAdminLogin setAdminLogin={setAdminLogin}></HomeAdminLogin>
       )}
       {employeeLogin && (
         <HomeEmployeeLogin setAdminLogin={setEmployeeLogin}></HomeEmployeeLogin>
       )}
-      <Navbar expand="lg" bg="white" className="the__navbar">
+      <Navbar expand="lg" bg="#F2EBD1" className="the__navbar">
         <Navbar.Brand href="/" className={"navbar__brand"}>
-          Aesthetic
+          EasyPizi
         </Navbar.Brand>
         {/* INside the navbar.collapse will be everything which will be collapsed */}
         <Navbar.Collapse
@@ -33,7 +33,7 @@ function Header() {
         >
           <Nav.Link className="the__header__icon ">
             <button className="login__admin__button" onClick={showAdminLogin}>
-              Login as admin
+              Admin SignIn
             </button>
           </Nav.Link>
           <Nav.Link>
@@ -41,7 +41,7 @@ function Header() {
               className="login__employee__button"
               onClick={showEmployeeLogin}
             >
-              Login as employee
+              Employee SignIn
             </button>
           </Nav.Link>
         </Navbar.Collapse>
@@ -64,4 +64,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default AdminHeader;

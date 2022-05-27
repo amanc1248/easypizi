@@ -5,12 +5,7 @@
     height: 100vh;
     padding: 1% 5%;
 }
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    /* margin-bottom: 70px; */
-}
+
 .app__title{
     font-family: 'Pacifico';
     font-size: 30px;
@@ -74,3 +69,17 @@ font-size: 40px;
         height:300px !important;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
