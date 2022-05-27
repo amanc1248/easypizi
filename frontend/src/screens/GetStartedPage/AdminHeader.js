@@ -1,17 +1,32 @@
 import React, { useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import "../../styles/GetStartedPage/AdminHeader.css";
 import HomeAdminLogin from "../../components/HomeAdminLogin";
 import HomeEmployeeLogin from "../../components/HomeEmployeeLogin";
+import {
+  adminLoginClean,
+  checkAdminLoginStatusClean,
+} from "../../actions/adminActions";
+import {
+  checkEmployeeLoginStatusClean,
+  employeeLoginClean,
+} from "../../actions/employeeActions";
 function AdminHeader() {
+  const dispatch = useDispatch();
   const [adminLogin, setAdminLogin] = useState(false);
   const showAdminLogin = () => {
+    dispatch(adminLoginClean());
+    dispatch(checkAdminLoginStatusClean());
     setAdminLogin(true);
   };
 
   const [employeeLogin, setEmployeeLogin] = useState(false);
   const showEmployeeLogin = () => {
+    dispatch(employeeLoginClean());
+    dispatch(checkEmployeeLoginStatusClean());
     setEmployeeLogin(true);
   };
   return (

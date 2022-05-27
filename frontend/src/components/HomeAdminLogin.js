@@ -37,10 +37,8 @@ function HomeAdminLogin({ setAdminLogin, adminError }) {
   const dispatch = useDispatch();
   const adminLoginHandler = (e) => {
     e.preventDefault();
-    if (adminPass) {
-      dispatch(adminLoginClean());
-      dispatch(checkAdminLoginStatusClean());
-      dispatch(adminLoginAction(adminPass));
+    if (adminPass && username) {
+      dispatch(adminLoginAction(adminPass, username));
     }
   };
 
@@ -58,7 +56,7 @@ function HomeAdminLogin({ setAdminLogin, adminError }) {
           <div className="title__and__close">
             <div className="admin__login__title">Login as admin</div>
             <div className="close__icon">
-              <CloseIcon onClick={closeLogin}></CloseIcon>
+              {!loading && <CloseIcon onClick={closeLogin}></CloseIcon>}
             </div>
           </div>
           {adminError && (
@@ -97,10 +95,12 @@ function HomeAdminLogin({ setAdminLogin, adminError }) {
           <br />
 
           <div>
-            <SignInRegisterButton
-              text="Login as Admin"
-              onClickHandler={adminLoginHandler}
-            ></SignInRegisterButton>
+            {!loading && !adminLogin && (
+              <SignInRegisterButton
+                text="Login as Admin"
+                onClickHandler={adminLoginHandler}
+              ></SignInRegisterButton>
+            )}
           </div>
           {loading && <Loader></Loader>}
           {error && <Message variant="danger">{error}</Message>}

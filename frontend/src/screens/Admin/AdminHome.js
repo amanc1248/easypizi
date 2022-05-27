@@ -35,9 +35,6 @@ function AdminHome() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (checkAdminLoginStatus === "expired") {
-      navigate("/auth/adminLoginExpired/false");
-    }
     if (checkAdminLoginStatus === "notLoggedIn") {
       navigate("/auth/adminNotLoggedIn/false");
     }

@@ -26,34 +26,20 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 
 // session
-const adminSession = session({
+const pathSession = session({
   secret: process.env.ADMIN_SECRET,
   resave: false,
   saveUninitialized: false,
   store: sessionStore,
-  name: "adminSession",
+  name: "pathSession",
   cookie: {
     maxAge: 1000 * 60 * 60 * 24,
     secure: false,
   },
 });
 
-// const employeeSession
-const employeeSession = session({
-  secret: process.env.EMPLOYEE_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  store: sessionStore,
-  name: "employeeSession",
-
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24,
-    secure: false,
-  },
-});
-
-app.use("/api/admin", adminSession, adminRoutes);
-app.use("/api/employee", employeeSession, employeeRoutes);
+app.use("/api/admin", pathSession, adminRoutes);
+app.use("/api/employee", pathSession, employeeRoutes);
 
 app.get("/api", (req, res) => {
   res.send("Api is running");

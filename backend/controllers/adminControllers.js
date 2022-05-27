@@ -56,45 +56,37 @@ const adminRegisterController = asyncHandler(async (req, res) => {
 
 // admin login
 const adminLoginController = asyncHandler(async (req, res) => {
-  const { pass } = req.body;
+  const { adminPass, username } = req.body;
   let sql = `
-  update admin
-  set previous_loggedIn='true'
-  where id =1;
+  select * from admin where id=?;
   `;
-  if (process.env.ADMIN_PASS === pass) {
-    req.session.adminAuthenticated = true;
-    db.query(sql, (err, result) => {
-      if (err) throw err;
-      else {
-        if (result) {
-          res.send("success");
-        }
-      }
-    });
-  } else {
-    res.status(401).send({ message: "Login Failed" });
-  }
-});
-
-const checkAdminLoginStatus = (req, res) => {
-  let sql = "select previous_loggedIn from admin where id=1;";
-  db.query(sql, (err, result) => {
+  db.query(sql, [username], (err, result) => {
     if (err) throw err;
     else {
-      if (result[0].previous_loggedIn === "true") {
-        if (req.session.adminAuthenticated) {
+      if (result.length !== 0) {
+        console.log("we have resutl");
+        console.log(result);
+        if (result[0].password === adminPass) {
+          req.session.adminAuthenticated = true;
+          req.session.admin_id = username;
           res.send("success");
         } else {
-          console.log("expired");
-          res.send("expired");
+          res.status(401).send({ message: "Password did not match" });
         }
       } else {
-        console.log("notLoggedIn");
-        res.send("notLoggedIn");
+        res.status(401).send({ message: "Invalid Credentials" });
       }
     }
   });
+});
+
+const checkAdminLoginStatus = (req, res) => {
+  if (req.session.adminAuthenticated) {
+    res.send("success");
+  } else {
+    console.log("expired");
+    res.send("notLoggedIn");
+  }
 };
 const adminAddEmployeeController = asyncHandler(async (req, res) => {
   const {
@@ -111,7 +103,7 @@ const adminAddEmployeeController = asyncHandler(async (req, res) => {
   console.log(iv);
   const employeeId = uniqid();
   let sql =
-    "INSERT INTO employee values (?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP())";
+    "INSERT INTO employee values (?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP(),?)";
 
   db.query(
     sql,
@@ -125,6 +117,7 @@ const adminAddEmployeeController = asyncHandler(async (req, res) => {
       employeeId,
       password,
       iv,
+      req.session.admin_id,
     ],
     (err, result) => {
       if (err) throw err;
@@ -139,9 +132,9 @@ const adminAddEmployeeController = asyncHandler(async (req, res) => {
 const adminFetchAllEmployeeController = asyncHandler(async (req, res) => {
   console.log("adminFetchEmployeeController ran");
   let sql =
-    "select id, name, designation from employee order by date_time DESC";
+    "select id, name, designation from employee where admin_id=? order by date_time DESC";
 
-  db.query(sql, (err, result) => {
+  db.query(sql, [req.session.admin_id], (err, result) => {
     if (err) throw err;
     else {
       if (result.length === 0) {

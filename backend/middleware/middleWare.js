@@ -24,23 +24,12 @@ const errorHandler = (err, req, res, next) => {
 const ensureAdminAuthentication = (req, res, next) => {
   console.log("Inside ensureAdminAuthentication");
   console.log(req.session);
-  let sql = "select previous_loggedIn from admin where id=1;";
-  db.query(sql, (err, result) => {
-    if (err) throw err;
-    else {
-      if (result[0].previous_loggedIn === "true") {
-        if (req.session.adminAuthenticated) {
-          return next();
-        } else {
-          console.log("expired");
-          res.send("expired");
-        }
-      } else {
-        console.log("notLoggedIn");
-        res.send("notLoggedIn");
-      }
-    }
-  });
+  if (req.session.adminAuthenticated) {
+    return next();
+  } else {
+    console.log("expired");
+    res.send("notLoggedIn");
+  }
 };
 // ensure employee authentication
 const ensureEmployeeAuthentication = (req, res, next) => {

@@ -87,7 +87,7 @@ export const adminRegisterClean = () => async (dispatch) => {
 };
 
 // admin login
-export const adminLoginAction = (pass) => async (dispatch) => {
+export const adminLoginAction = (adminPass, username) => async (dispatch) => {
   try {
     dispatch({
       type: ADMIN_LOGIN,
@@ -99,7 +99,7 @@ export const adminLoginAction = (pass) => async (dispatch) => {
     };
     const { data } = await axios.post(
       `/api/admin/adminLogin`,
-      { pass },
+      { adminPass, username },
       config
     );
     dispatch({
