@@ -67,10 +67,10 @@ const GetStartedPage = () => {
         <div className="row get__started__section ">
           <div className="col col-lg-6 col-md-12 col-sm-12  text__section">
             <div className="text__section__title">
-              Manage your employee & user all in one place.
+              Manage your all employees & users all in one place.
             </div>
             <div className="text__section__subtitle">
-              Admin can assigns employees and users. And Employees send any
+              Admin can add employees and users. And Employees can send any
               updates via email.🎉
             </div>
             <div className="">
