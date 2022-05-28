@@ -147,7 +147,7 @@ export const employeeByIdClean = () => async (dispatch) => {
 };
 
 // employee FETCH USERS
-export const employeeFetchUsersAction = () => async (dispatch) => {
+export const employeeFetchUsersAction = (id) => async (dispatch) => {
   try {
     dispatch({
       type: EMPLOYEE_FETCH_USERS,
@@ -157,7 +157,7 @@ export const employeeFetchUsersAction = () => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.get(`/api/employee/fetchUsers`, config);
+    const { data } = await axios.get(`/api/employee/fetchUsers/${id}`, config);
     dispatch({
       type: EMPLOYEE_FETCH_USERS_SUCCESS,
       payload: data,

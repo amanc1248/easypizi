@@ -20,10 +20,13 @@ function EmployeeUsers() {
   const { loading, fetchedUsers } = useSelector(
     (state) => state.employeeFetchUsersReducer
   );
+  const { employeeById } = useSelector((state) => state.employeeByIdReducer);
 
   // useEffects
   useEffect(() => {
-    dispatch(employeeFetchUsersAction());
+    if (employeeById) {
+      dispatch(employeeFetchUsersAction(employeeById.admin_id));
+    }
   }, [dispatch]);
 
   useEffect(() => {

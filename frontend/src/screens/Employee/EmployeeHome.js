@@ -13,6 +13,7 @@ function EmployeeHome() {
   const { loading, checkEmployeeLoginStatus, error } = useSelector(
     (state) => state.checkEmployeeLoginStatusReducer
   );
+
   useEffect(() => {
     dispatch(checkEmployeeLoginStatusAction());
   }, [dispatch]);

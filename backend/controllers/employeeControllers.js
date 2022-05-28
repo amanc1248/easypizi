@@ -89,13 +89,17 @@ const employeeByIdController = asyncHandler(async (req, res) => {
 });
 //fetch users
 const employeeFetchUsersController = asyncHandler(async (req, res) => {
-  let sql = "SELECT * from user;";
-  db.query(sql, (err, result) => {
+  console.log("I am inside employeeFetchUsersController");
+  const { id } = req.params;
+  let sql = "SELECT * from user where admin_id=?;";
+  db.query(sql, [id], (err, result) => {
     if (err) throw err;
     else {
       if (result.length === 0) {
+        console.log(result);
         res.send("no users");
       } else {
+        console.log(result);
         res.send(result);
       }
     }

@@ -18,7 +18,7 @@ router
   .route("/employeeById")
   .get(ensureEmployeeAuthentication, employeeByIdController);
 router
-  .route("/fetchUsers")
+  .route("/fetchUsers/:id")
   .get(ensureEmployeeAuthentication, employeeFetchUsersController);
 router.route("/logout").get(employeeLogoutController);
 router
