@@ -35,6 +35,10 @@ import {
   ADMIN_FETCH_EMPLOYEE_BY_ID_CLEAN,
   ADMIN_FETCH_EMPLOYEE_BY_ID_FAILURE,
   ADMIN_FETCH_EMPLOYEE_BY_ID_SUCCESS,
+  ADMIN_FETCH_USER,
+  ADMIN_FETCH_USER_CLEAR,
+  ADMIN_FETCH_USER_FAILURE,
+  ADMIN_FETCH_USER_SUCCESS,
   ADMIN_LOGIN,
   ADMIN_LOGIN_CLEAN,
   ADMIN_LOGIN_FAIL,
@@ -127,6 +131,20 @@ export const adminAddEmployeeReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case ADMIN_ADD_EMPLOYEE_CLEAR:
       return { addEmployee: null, error: null };
+    default:
+      return state;
+  }
+};
+export const adminFetchUsersReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADMIN_FETCH_USER:
+      return { loading: true };
+    case ADMIN_FETCH_USER_SUCCESS:
+      return { loading: false, adminUsers: action.payload };
+    case ADMIN_FETCH_USER_FAILURE:
+      return { loading: false, error: action.payload };
+    case ADMIN_FETCH_USER_CLEAR:
+      return { adminUsers: null, error: null };
     default:
       return state;
   }

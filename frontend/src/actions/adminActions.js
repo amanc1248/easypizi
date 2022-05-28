@@ -51,6 +51,10 @@ import {
   ADMIN_ADD_USER_SUCCESS,
   ADMIN_ADD_USER_FAILURE,
   ADMIN_ADD_USER_CLEAR,
+  ADMIN_FETCH_USER,
+  ADMIN_FETCH_USER_SUCCESS,
+  ADMIN_FETCH_USER_FAILURE,
+  ADMIN_FETCH_USER_CLEAR,
 } from "../constants/adminConstants";
 
 const axios = require("axios");
@@ -303,6 +307,40 @@ export const adminFetchEmployeeAction = () => async (dispatch) => {
 export const adminFetchEmployeeCleanAction = () => async (dispatch) => {
   dispatch({
     type: ADMIN_FETCH_EMPLOYEES_CLEAN,
+  });
+};
+
+// admin FETCH EMPLOYEE
+export const adminFetchUsersAction = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADMIN_FETCH_USER,
+    });
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.get(`/api/admin/fetchUsers`, config);
+    dispatch({
+      type: ADMIN_FETCH_USER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_FETCH_USER_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+// admin FETCH USERS
+export const adminFetchUserCleanAction = () => async (dispatch) => {
+  dispatch({
+    type: ADMIN_FETCH_USER_CLEAR,
   });
 };
 

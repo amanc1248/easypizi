@@ -222,6 +222,49 @@ const employeeSendEmailController = asyncHandler(async (req, res) => {
   }
 });
 
+const employeeSendOnlyEmailController = asyncHandler(async (req, res) => {
+  console.log(req.body);
+  const { employeeEmail, password, host, subject, userEmail, email } = req.body;
+  console.log("employeeEmail:", employeeEmail);
+  console.log("password:", password);
+  let transporter = nodemailer.createTransport({
+    host: host,
+    port: 587,
+    secure: false,
+    auth: {
+      user: employeeEmail,
+      pass: password,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  // verify connection configuration
+  transporter.verify(function (error, success) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Server is ready to take our messages");
+    }
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: `<${employeeEmail}>`, // sender address
+    to: userEmail, // list of receivers
+    subject: subject, // Subject line
+    text: email,
+  });
+
+  console.log("Message sent: %s", info.messageId);
+
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  if (info.messageId) {
+    res.send("success");
+  }
+});
+
 module.exports = {
   employeeLoginController,
   employeeFetchUsersController,
@@ -229,4 +272,5 @@ module.exports = {
   employeeSendEmailController,
   employeeByIdController,
   checkEmployeeLoginStatus,
+  employeeSendOnlyEmailController,
 };

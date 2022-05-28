@@ -192,6 +192,22 @@ const adminEmployeeByIdController = asyncHandler(async (req, res) => {
     }
   });
 });
+
+//admin fetch users
+const adminFetchUsersController = asyncHandler(async (req, res) => {
+  let sql = "SELECT * from user where admin_id=?;";
+  db.query(sql, [req.session.admin_id], (err, result) => {
+    if (err) throw err;
+    else {
+      if (result.length === 0) {
+        res.send("no users");
+      } else {
+        res.send(result);
+      }
+    }
+  });
+});
+
 //fetch employee by Id all details
 const adminEmployeeByIdAllDetailsController = asyncHandler(async (req, res) => {
   console.log("adminEmployeeByIdController rannn...");
@@ -309,4 +325,5 @@ module.exports = {
   adminEmployeeByIdAllDetailsController,
   adminByIdController,
   adminAddUserController,
+  adminFetchUsersController,
 };

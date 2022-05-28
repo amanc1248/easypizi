@@ -31,6 +31,10 @@ import {
   SEND_EMAIL_CLEAN,
   SEND_EMAIL_FAILURE,
   SEND_EMAIL_SUCCESS,
+  SEND_PLAIN_EMAIL,
+  SEND_PLAIN_EMAIL_CLEAN,
+  SEND_PLAIN_EMAIL_FAILURE,
+  SEND_PLAIN_EMAIL_SUCCESS,
 } from "../constants/employeeConstants";
 
 export const employeeLoginReducer = (state = {}, action) => {
@@ -152,6 +156,21 @@ export const employeeSendEmailReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case SEND_EMAIL_CLEAN:
       return { sentEmail: null };
+
+    default:
+      return state;
+  }
+};
+export const employeeSendPlainEmailReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SEND_PLAIN_EMAIL:
+      return { loading: true };
+    case SEND_PLAIN_EMAIL_SUCCESS:
+      return { loading: false, sentPlainEmail: action.payload };
+    case SEND_PLAIN_EMAIL_FAILURE:
+      return { loading: false, error: action.payload };
+    case SEND_PLAIN_EMAIL_CLEAN:
+      return { sentPlainEmail: null };
 
     default:
       return state;

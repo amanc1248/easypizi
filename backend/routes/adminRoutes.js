@@ -13,6 +13,7 @@ const {
   adminRegisterController,
   adminByIdController,
   adminAddUserController,
+  adminFetchUsersController,
 } = require("../controllers/adminControllers.js");
 const {
   ensureAdminAuthentication,
@@ -32,6 +33,9 @@ router
 router
   .route("/fetchEmployee")
   .get(ensureAdminAuthentication, adminFetchAllEmployeeController);
+router
+  .route("/fetchUsers")
+  .get(ensureAdminAuthentication, adminFetchUsersController);
 router.route("/adminById").get(ensureAdminAuthentication, adminByIdController);
 router
   .route("/fetchEmployeeById/:id")

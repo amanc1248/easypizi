@@ -31,6 +31,10 @@ import {
   SEND_EMAIL_CLEAN,
   SEND_EMAIL_FAILURE,
   SEND_EMAIL_SUCCESS,
+  SEND_PLAIN_EMAIL,
+  SEND_PLAIN_EMAIL_CLEAN,
+  SEND_PLAIN_EMAIL_FAILURE,
+  SEND_PLAIN_EMAIL_SUCCESS,
 } from "../constants/employeeConstants";
 
 // employee LOGIN
@@ -311,5 +315,41 @@ export const employeeSendEmailAction = (emailData) => async (dispatch) => {
 export const employeeSendEmailClean = () => async (dispatch) => {
   dispatch({
     type: SEND_EMAIL_CLEAN,
+  });
+};
+
+export const employeeSendPlainEmailAction = (emailData) => async (dispatch) => {
+  try {
+    dispatch({
+      type: SEND_PLAIN_EMAIL,
+    });
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.post(
+      `/api/employee/sendPlainEmail`,
+      emailData,
+      config
+    );
+    dispatch({
+      type: SEND_PLAIN_EMAIL_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: SEND_PLAIN_EMAIL_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const employeeSendPlainEmailClean = () => async (dispatch) => {
+  dispatch({
+    type: SEND_PLAIN_EMAIL_CLEAN,
   });
 };

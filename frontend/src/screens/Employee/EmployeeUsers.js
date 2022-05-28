@@ -9,24 +9,12 @@ import { useNavigate } from "react-router-dom";
 import NewlyMintedNFTs from "./NewlyMintedNFTs";
 import LoaderMain from "../../components/LoaderMain";
 import UserLoader from "../../components/UserLoader";
+import SendEmail from "../../components/SendEmail";
 function EmployeeUsers() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // states
-
-  const [newMinted, setNewMinted] = useState(false);
-  const [oldestNFTs, setOldestNFTs] = useState(false);
-
-  const showNewlyMinted = () => {
-    dispatch(employeeFetchNewlyMintedNFTsClean());
-
-    setNewMinted(true);
-  };
-  const showOldestNFTs = () => {
-    dispatch(employeeFetchNewlyMintedNFTsClean());
-    setOldestNFTs(true);
-  };
 
   // useSelectors
   const { loading, fetchedUsers } = useSelector(
@@ -63,50 +51,7 @@ function EmployeeUsers() {
               return (
                 <div key={user.id}>
                   {" "}
-                  <div className="admin__employee__container">
-                    {oldestNFTs && (
-                      <NewlyMintedNFTs
-                        closeFnc={setOldestNFTs}
-                        user={user}
-                        type="oldestNFTs"
-                      ></NewlyMintedNFTs>
-                    )}
-
-                    {newMinted && (
-                      <NewlyMintedNFTs
-                        closeFnc={setNewMinted}
-                        user={user}
-                        type="newlyMinted"
-                      ></NewlyMintedNFTs>
-                    )}
-                    <div className="employee__container">
-                      <div className="employee_details">
-                        <div className="employee__name__post">
-                          <div className="employee__name">{user.name}</div>
-                        </div>
-                      </div>
-                      <div className="">
-                        <div>
-                          <button
-                            className="edit_employee__button"
-                            onClick={showOldestNFTs}
-                          >
-                            Send some Oldest NFTs from Opensea.
-                          </button>{" "}
-                        </div>
-
-                        <br />
-                        <div>
-                          <button
-                            className="edit_employee__button"
-                            onClick={showNewlyMinted}
-                          >
-                            Send Newly Minted NFTs.
-                          </button>{" "}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <SingleUser user={user}></SingleUser>
                 </div>
               );
             })}
@@ -117,3 +62,33 @@ function EmployeeUsers() {
 }
 
 export default EmployeeUsers;
+
+function SingleUser({ user }) {
+  const [sendEmail, setSendEmail] = useState(false);
+  const showSendEmail = () => {
+    setSendEmail(true);
+  };
+  return (
+    <div className="admin__employee__container">
+      {sendEmail && (
+        <SendEmail setSendEmail={setSendEmail} user={user}></SendEmail>
+      )}
+      <div className="employee__container">
+        <div className="employee_details">
+          <div className="employee__name__post">
+            <div className="employee__name">{user.name}</div>
+          </div>
+        </div>
+        <div className="">
+          <div>
+            <button className="edit_employee__button" onClick={showSendEmail}>
+              Send Email
+            </button>{" "}
+          </div>
+
+          <br />
+        </div>
+      </div>
+    </div>
+  );
+}

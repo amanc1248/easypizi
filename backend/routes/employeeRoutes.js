@@ -7,6 +7,7 @@ const {
   employeeSendEmailController,
   employeeByIdController,
   checkEmployeeLoginStatus,
+  employeeSendOnlyEmailController,
 } = require("../controllers/employeeControllers");
 const { ensureEmployeeAuthentication } = require("../middleware/middleWare");
 
@@ -23,5 +24,9 @@ router.route("/logout").get(employeeLogoutController);
 router
   .route("/sendEmail")
   .post(ensureEmployeeAuthentication, employeeSendEmailController);
+
+router
+  .route("/sendPlainEmail")
+  .post(ensureEmployeeAuthentication, employeeSendOnlyEmailController);
 
 module.exports = router;

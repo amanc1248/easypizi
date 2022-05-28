@@ -154,3 +154,32 @@
         height:200px !important;
     }
 }
+
+
+.employee__users__tab{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    /* justify-content: space-around; */
+}
+.the__tab{
+    /* background-color: #237CCE; */
+    padding: 10px;
+    color: black;
+    margin-right: 10px;
+}
+.active__tab{
+    border-bottom:2px solid #237CCE;
+}
+/* adminhome css */
+.the__adminHome__navbar{
+    display: flex;
+    justify-content: space-between !important;
+    align-items: baseline;
+    padding: 20px;
+}
+.admin__logout__button{
+    color: blue;
+    font-weight: 800;
+    cursor: pointer;
+}

@@ -18,6 +18,7 @@ import Message from "../../components/Message";
 import LoaderMain from "../../components/LoaderMain";
 import UserLoader from "../../components/UserLoader";
 import AddUser from "./AddUser";
+import AdminUsers from "./AdminUsers";
 
 function AdminHome() {
   const dispatch = useDispatch();
@@ -29,6 +30,18 @@ function AdminHome() {
   const [addUser, setAddUser] = useState(false);
   const showAddUser = () => {
     setAddUser(true);
+  };
+
+  const [showEmployees, setShowEmployees] = useState(true);
+  const [showUsers, setShowUsers] = useState(false);
+
+  const showFirstTab = () => {
+    setShowEmployees(true);
+    setShowUsers(false);
+  };
+  const showSecondTab = () => {
+    setShowEmployees(false);
+    setShowUsers(true);
   };
 
   // useSelectors
@@ -75,7 +88,22 @@ function AdminHome() {
               </button>
             </div>
             <div className="users__container col-lg-6 col-md-12 col-sm-12">
-              <AdminEmployees></AdminEmployees>
+              <div className="employee__users__tab">
+                <div
+                  className={`the__tab ${showEmployees && "active__tab"}`}
+                  onClick={showFirstTab}
+                >
+                  Employees
+                </div>
+                <div
+                  className={`the__tab ${showUsers && "active__tab"}`}
+                  onClick={showSecondTab}
+                >
+                  Users
+                </div>
+              </div>
+              {showEmployees && <AdminEmployees></AdminEmployees>}
+              {showUsers && <AdminUsers></AdminUsers>}
             </div>
           </div>
         </div>
